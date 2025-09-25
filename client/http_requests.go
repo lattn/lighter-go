@@ -126,3 +126,77 @@ func (c *HTTPClient) GetTransferFeeInfo(accountIndex, toAccountIndex int64, auth
 	}
 	return result, nil
 }
+
+func (c *HTTPClient) GetAccount(accountIndex int64) (*GetAccountResult, error) {
+	result := &GetAccountResult{}
+	err := c.getAndParseL2HTTPResponse("api/v1/account", map[string]any{
+		"by":    "index",
+		"value": accountIndex,
+	}, result)
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+func (c *HTTPClient) GetAccountsByL1Address(l1Address string) (*GetAccountsByL1AddressResult, error) {
+	result := &GetAccountsByL1AddressResult{}
+	err := c.getAndParseL2HTTPResponse("api/v1/accountsByL1Address", map[string]any{
+		"l1_address": l1Address,
+	}, result)
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+func (c *HTTPClient) GetAccountLimits(accountIndex int64, auth string) (*GetAccountLimitsResult, error) {
+	result := &GetAccountLimitsResult{}
+	err := c.getAndParseL2HTTPResponse("api/v1/accountLimits", map[string]any{
+		"auth":          auth,
+		"account_index": accountIndex,
+	}, result)
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+func (c *HTTPClient) GetAccountActiveOrders(accountIndex, marketId int64, auth string) (*GetAccountActiveOrdersResult, error) {
+	result := &GetAccountActiveOrdersResult{}
+	err := c.getAndParseL2HTTPResponse("api/v1/accountActiveOrders", map[string]any{
+		"auth":          auth,
+		"account_index": accountIndex,
+		"market_id":     marketId,
+	}, result)
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+func (c *HTTPClient) GetAccountInactiveOrders(accountIndex, marketId, limit int64, cursor, auth string) (*GetAccountActiveOrdersResult, error) {
+	result := &GetAccountActiveOrdersResult{}
+	err := c.getAndParseL2HTTPResponse("api/v1/accountInactiveOrders", map[string]any{
+		"auth":          auth,
+		"account_index": accountIndex,
+		"market_id":     marketId,
+		"cursor":        cursor,
+		"limit":         limit,
+	}, result)
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+func (c *HTTPClient) GetOrderBookDetails(marketId int64) (*GetOrderBookDetailResult, error) {
+	result := &GetOrderBookDetailResult{}
+	err := c.getAndParseL2HTTPResponse("api/v1/orderBookDetails", map[string]any{
+		"market_id": marketId,
+	}, result)
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}

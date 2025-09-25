@@ -10,6 +10,11 @@ import (
 )
 
 const (
+	ChainIDMainnet = 304
+	ChainIDTestnet = 300
+)
+
+const (
 	defaultExpireTime = time.Minute*10 - time.Second // we need to give a second margin, to eliminate millisecond differences
 )
 
