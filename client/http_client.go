@@ -30,6 +30,7 @@ type HTTPClient struct {
 	endpoint            string
 	channelName         string
 	fatFingerProtection bool
+	HttpClient          *http.Client
 }
 
 func NewHTTPClient(baseUrl string) *HTTPClient {
@@ -41,6 +42,7 @@ func NewHTTPClient(baseUrl string) *HTTPClient {
 		endpoint:            baseUrl,
 		channelName:         "",
 		fatFingerProtection: true,
+		HttpClient:          httpClient,
 	}
 }
 

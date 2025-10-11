@@ -36,7 +36,7 @@ func (c *HTTPClient) getAndParseL2HTTPResponse(path string, params map[string]an
 		q.Set(k, fmt.Sprintf("%v", v))
 	}
 	u.RawQuery = q.Encode()
-	resp, err := httpClient.Get(u.String())
+	resp, err := c.HttpClient.Get(u.String())
 	if err != nil {
 		return err
 	}
