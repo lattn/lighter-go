@@ -211,3 +211,34 @@ type GetFundingRatesResult struct {
 	ResultCode
 	FundingRates []FundingRate `json:"funding_rates"`
 }
+
+type Trade struct {
+	TradeId                          int             `json:"trade_id"`
+	TxHash                           string          `json:"tx_hash"`
+	Type                             string          `json:"type"`
+	MarketId                         int             `json:"market_id"`
+	Size                             decimal.Decimal `json:"size"`
+	Price                            decimal.Decimal `json:"price"`
+	UsdAmount                        decimal.Decimal `json:"usd_amount"`
+	AskId                            int64           `json:"ask_id"`
+	BidId                            int64           `json:"bid_id"`
+	AskAccountId                     int             `json:"ask_account_id"`
+	BidAccountId                     int             `json:"bid_account_id"`
+	IsMakerAsk                       bool            `json:"is_maker_ask"`
+	BlockHeight                      int             `json:"block_height"`
+	Timestamp                        int64           `json:"timestamp"`
+	TakerPositionSizeBefore          decimal.Decimal `json:"taker_position_size_before"`
+	TakerEntryQuoteBefore            decimal.Decimal `json:"taker_entry_quote_before"`
+	TakerInitialMarginFractionBefore int             `json:"taker_initial_margin_fraction_before"`
+	TakerPositionSignChanged         bool            `json:"taker_position_sign_changed"`
+	MakerFee                         int             `json:"maker_fee"`
+	MakerPositionSizeBefore          decimal.Decimal `json:"maker_position_size_before"`
+	MakerEntryQuoteBefore            decimal.Decimal `json:"maker_entry_quote_before"`
+	MakerInitialMarginFractionBefore int             `json:"maker_initial_margin_fraction_before"`
+}
+
+type GetTradesResult struct {
+	ResultCode
+	NextCursor string  `json:"next_cursor"`
+	Trades     []Trade `json:"trades"`
+}

@@ -190,6 +190,22 @@ func (c *HTTPClient) GetAccountInactiveOrders(accountIndex, marketId, limit int6
 	return result, nil
 }
 
+func (c *HTTPClient) GetAccountTrades(accountIndex, marketId, limit int64, cursor, auth string) (*GetTradesResult, error) {
+	result := &GetTradesResult{}
+	err := c.getAndParseL2HTTPResponse("api/v1/trades", map[string]any{
+		"auth":          auth,
+		"account_index": accountIndex,
+		"market_id":     marketId,
+		"cursor":        cursor,
+		"limit":         limit,
+		"sort_by":       "trade_id",
+	}, result)
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
 func (c *HTTPClient) GetOrderBookDetails(marketId int64) (*GetOrderBookDetailResult, error) {
 	result := &GetOrderBookDetailResult{}
 	err := c.getAndParseL2HTTPResponse("api/v1/orderBookDetails", map[string]any{
