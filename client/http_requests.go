@@ -200,3 +200,12 @@ func (c *HTTPClient) GetOrderBookDetails(marketId int64) (*GetOrderBookDetailRes
 	}
 	return result, nil
 }
+
+func (c *HTTPClient) GetFundingRates() (*GetFundingRatesResult, error) {
+	result := &GetFundingRatesResult{}
+	err := c.getAndParseL2HTTPResponse("api/v1/funding-rates", map[string]any{}, result)
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}

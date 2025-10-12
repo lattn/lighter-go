@@ -199,3 +199,15 @@ type GetOrderBookDetailResult struct {
 	ResultCode
 	OrderBookDetails []OrderBookDetails `json:"order_book_details"`
 }
+
+type FundingRate struct {
+	MarketId int     `json:"market_id"`
+	Exchange string  `json:"exchange"`
+	Symbol   string  `json:"symbol"`
+	Rate     float64 `json:"rate"`
+}
+
+type GetFundingRatesResult struct {
+	ResultCode
+	FundingRates []FundingRate `json:"funding_rates"`
+}
